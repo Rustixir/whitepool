@@ -2,9 +2,6 @@
 # Whitepool - A hunky Rust+Tokio worker pool factory
 
 
-
-# What is it
-
 *   WhitePool is a **lightweight, generic** pooling library for Rust+Tokio with a focus 
     on **simplicity**, **performance**, and **rock-solid** disaster recovery.
 
