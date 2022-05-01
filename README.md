@@ -15,6 +15,7 @@
 
 ```rust 
 
+
 #[tokio::main]
 async fn main() {
 
@@ -25,45 +26,68 @@ async fn main() {
     // Create a session for communicate with pool channel
     let session = Pool::new(pool_size, 
                             max_overflow, 
-                            || Box::pin(async move {
-                                Connection                                              
-                            })).await.run_service();                            
+                            || {Box::pin(async move {
+
+                                // tokio_postgres create connection 
+
+                                let (client, connection) =
+                                        tokio_postgres::connect("host=localhost user=postgres", NoTls)
+                                        .await.unwrap();
+
+                                tokio::spawn(async move {
+                                    if let Err(e) = connection.await {
+                                        eprintln!("connection error: {}", e);
+                                    }
+                                });
+                                
+                                // return client
+                                client
+
+                            })}).await.run_service();                            
     
+
+                            
     // session.clone() internally call channel mpsc::Sender::Clone
-    printer(session.clone()).await;
+    process(session.clone()).await;
     
-    printer(session.clone()).await;
+    process(session.clone()).await;
     
-    printer(session).await;
+    process(session.clone()).await;
+
+
+
+    // wait until all pending checkout handled, then shutdown
+    session.safe_shutdown().await
+    
+
+
+    tokio::time::sleep(Duration::from_secs(100)).await;
 }
 
-pub async fn printer(mut session: Session<Connection>) {
+pub async fn process(session: Session<Client>) {
 
 
     // Checkout a resource from Pool
     // block_checkout don't block your scheduler
     // just await on oneshot with timeout
-    if let Ok(mut resource) = session.block_checkout().await {
-        
-        // call operaiton here
-        resource.get().print();
+    if let Ok(mut client) = session.block_checkout().await {
+                
+    // ============== start ===================
+
+        let _rows = client
+                    .get()
+                    .query("SELECT $1::TEXT", &[&"hello world"])
+                    .await.unwrap();
+
+
+    // ============== end ===================
 
         // after job done, call checkin
-        session.checkin(resource).await;
+        let _ = session.checkin(client).await;
 
         // OR if resource destroy, call this
         // session.destroyed(resource).await;
     } 
-}
-
-
-
-#[derive(Debug)]
-pub struct Connection;
-impl Connection {
-    pub fn print(&self){ 
-        println!("==> Print!")
-    }
 }
 
 

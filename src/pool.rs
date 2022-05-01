@@ -392,7 +392,10 @@ where
                         return WorkerState::Continue
                     }
                     Request::ShutdownSafe => {
-                        self.shutdown = true;
+                        // if not called shutdown already.
+                        if !self.shutdown {
+                            self.shutdown = true;
+                        }                         
                         return WorkerState::Continue
                     }
                     Request::Recycle => {
@@ -670,5 +673,12 @@ where
     
     pub async fn print_statistics(&self) {
         let _ = self.sender.send_timeout(Request::PrintStatistics, TIMEOUT).await;
+    }
+
+
+    /// after recv this signal, server close channel
+    /// and handle all already request incomed for checkout then terminate
+    pub async fn safe_shutdown(&self) {
+        let _ = self.sender.send(Request::ShutdownSafe).await;
     }
 }
