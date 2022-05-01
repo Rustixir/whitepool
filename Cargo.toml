@@ -6,7 +6,7 @@ authors = ["DanyalMhai@gmail.com"]
 readme = "README.md"
 description = "lightweight, generic pooling library for Rust+Tokio inspired by Elixir poolboy"
 license = "Apache-2.0"
-keywords = ["Connection Pool", "Pool", "worker pool", "database"]
+keywords = ["ConnectionPool", "Pool", "workerpool", "database"]
 homepage   = "https://github.com/Rustixir/whitepool"
 repository = "https://github.com/Rustixir/whitepool"
 
