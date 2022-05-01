@@ -3,7 +3,7 @@
 
   <!-- Downloads -->
   <a href="https://crates.io/crates/whitepool">
-    <img src="https://img.shields.io/crates/d/sqlx.svg?style=flat-square"
+    <img src="https://img.shields.io/crates/d/whitepool.svg?style=flat-square"
       alt="Download" />
   </a>
 </div>
