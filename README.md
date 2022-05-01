@@ -5,7 +5,7 @@
 *   WhitePool is a **lightweight, generic** pooling library for Rust+Tokio 
     with a focus on **simplicity**, **performance**, and **rock-solid** disaster recovery.
 
-*   Whitepool is duplicate of **Elixir/Erlang Poolboy**
+*   Whitepool inspired by **Elixir/Erlang Poolboy**
     **almost all Elixir/Erlang Database library** rely on it for **Connetcion Pooling**
 
 
