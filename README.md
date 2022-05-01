@@ -2,8 +2,8 @@
 # Whitepool - A hunky Rust+Tokio worker pool factory
 
 
-*   WhitePool is a **lightweight, generic** pooling library for Rust+Tokio with a focus 
-    on **simplicity**, **performance**, and **rock-solid** disaster recovery.
+*   WhitePool is a **lightweight, generic** pooling library for Rust+Tokio 
+    with a focus on **simplicity**, **performance**, and **rock-solid** disaster recovery.
 
 *   Whitepool is duplicate of **Elixir/Erlang Poolboy**
     **almost all Elixir/Erlang Database library** rely on it for **Connetcion Pooling**
