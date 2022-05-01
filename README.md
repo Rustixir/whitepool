@@ -1,3 +1,12 @@
+<div align="center">
+
+
+  <!-- Downloads -->
+  <a href="https://crates.io/crates/whitepool">
+    <img src="https://img.shields.io/crates/d/sqlx.svg?style=flat-square"
+      alt="Download" />
+  </a>
+</div>
 
 # Whitepool - A hunky Rust+Tokio worker pool factory
 
