@@ -15,7 +15,7 @@
     with a focus on **simplicity**, **performance**, and **rock-solid** disaster recovery.
 
 *   Whitepool inspired by **Elixir/Erlang Poolboy**
-    **almost all Elixir/Erlang Database library** rely on it for **Connetcion Pooling**
+    **almost all Elixir/Erlang Database library** rely on it for **Connection Pooling**
 
 
 
